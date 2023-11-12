@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tj-order
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tj-order
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      name: tj-order
+      labels:
+        app: tj-order
+    spec:
+      containers:
+      - image: kmg28801/tj-order
+        name: app
